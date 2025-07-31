@@ -1,4 +1,4 @@
-# Office Space Management System Documentation
+# OfficeOps - Office Space Management System Documentation
 
 ## Table of Contents
 1. [Project Overview](#1-project-overview)
