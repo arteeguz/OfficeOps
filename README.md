@@ -419,3 +419,74 @@ git push origin main
 3. Plan Phase 1 Features
 4. Estimate Timeline for Production
 5. Define Infrastructure Requirements
+
+# Git Setup Guide
+
+## Prerequisites
+**Important**: Make sure you haven't run `git init` in subfolders (`frontend/` or `backend/`). If you did, delete the `.git` folders in them first.
+
+## Step 1: Navigate to Project Root
+```bash
+cd ~/office-space-management
+```
+
+## Step 2: Clean Up Nested Git Folders
+Remove any `.git` folders from subfolders to avoid submodule issues:
+```bash
+rm -rf backend/.git frontend/.git
+```
+
+## Step 3: Initialize Git Repository
+Initialize git only at the project root:
+```bash
+git init
+git add .
+git commit -m "Initial project setup: backend + frontend"
+```
+
+## Step 4: Connect to GitHub
+Connect your local repo to GitHub:
+```bash
+git remote add origin git@github.com:arteeguz/OfficeOps.git
+git branch -M main
+```
+
+## Step 5: Push to GitHub
+```bash
+git push -u origin main
+```
+
+## Create .gitignore File
+Create a `.gitignore` file to exclude unnecessary files:
+
+```bash
+cat > .gitignore << 'EOF'
+# Node
+node_modules/
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# React build
+frontend/build/
+
+# OS
+.DS_Store
+Thumbs.db
+EOF
+```
+
+Then update your repository:
+```bash
+git rm -r --cached .
+git add .
+git commit -m "Add .gitignore and cleanup tracked files"
+git push
+```
+
+## Result
+Your complete project structure (both `backend/` and `frontend/`) will now be on GitHub without any submodule errors.
+

@@ -105,40 +105,56 @@ function ImportExport() {
       <h1>Import/Export Data</h1>
       
       <div className="card">
-        <h2>Export Data</h2>
-        <p>Download current office space data as Excel file</p>
-        <button className="btn btn-success" onClick={handleExport}>
-          Export to Excel
+        <div className="card-header">
+          <h2>Export Current Data</h2>
+        </div>
+        <p style={{ marginBottom: '1.5rem' }}>
+          Download the current office space data as an Excel file for reporting or backup purposes.
+        </p>
+        <button className="btn btn-accent" onClick={handleExport}>
+          📥 Export to Excel
         </button>
       </div>
 
       <div className="card">
-        <h2>Import Data</h2>
+        <div className="card-header">
+          <h2>Import Data from Excel</h2>
+        </div>
         
         <div className="form-group">
-          <label>Select Excel File</label>
+          <label>Select Excel File (.xlsx or .xls)</label>
           <input 
             type="file" 
             accept=".xlsx,.xls"
             onChange={handleFileChange}
             className="form-control"
+            style={{ padding: '0.5rem' }}
           />
         </div>
 
         {fileInfo && (
           <>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <p><strong>File:</strong> {file.name}</p>
-              <p><strong>Total Rows:</strong> {fileInfo.totalRows}</p>
-              <p><strong>Columns Found:</strong> {fileInfo.headers.join(', ')}</p>
+            <div style={{ 
+              padding: '1rem', 
+              backgroundColor: '#E6F2FA', 
+              borderRadius: '4px',
+              marginBottom: '1.5rem' 
+            }}>
+              <p style={{ margin: '0.5rem 0' }}><strong>File:</strong> {file.name}</p>
+              <p style={{ margin: '0.5rem 0' }}><strong>Total Rows:</strong> {fileInfo.totalRows}</p>
+              <p style={{ margin: '0.5rem 0' }}><strong>Columns Found:</strong> {fileInfo.headers.join(', ')}</p>
             </div>
 
-            <h3>Column Mappings</h3>
-            <p style={{ marginBottom: '1rem', color: '#7f8c8d' }}>
-              Map Excel columns to database fields
+            <h3>Column Mapping Configuration</h3>
+            <p style={{ marginBottom: '1rem', color: 'var(--rbc-gray)' }}>
+              Map your Excel columns to the corresponding database fields
             </p>
             
-            <div style={{ marginBottom: '1.5rem' }}>
+            <div style={{ 
+              display: 'grid', 
+              gap: '1rem', 
+              marginBottom: '2rem' 
+            }}>
               {fileInfo.headers.map(header => (
                 <div key={header} className="form-group">
                   <label>{header}</label>
@@ -163,7 +179,7 @@ function ImportExport() {
               onClick={handleImport}
               disabled={importing || Object.keys(mappings).length === 0}
             >
-              {importing ? 'Importing...' : 'Import Data'}
+              {importing ? 'Importing Data...' : 'Start Import'}
             </button>
           </>
         )}
